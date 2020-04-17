@@ -1,99 +1,82 @@
-body{
-    margin: 0;
-    padding: 0;
-    color: white;
-    width: 100%;
-    min-height: 100%;
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: rgba(255,255,255,0);
-}
 
-body section.slideshow{
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
+.container{
+    width: 90%;
     margin: 0 auto;
-    visibility: hidden;
-    overflow: hidden;
 }
 
-body section.slideshow ul.navigation{
-    position: absolute;
-    display: block;
-    width: 640px;
-    height: 640px;
-    padding: 0;
-    margin: 0;
-    left: -230px;
-    top: 50%;
-    margin-top: -320px;
-    z-index: 10;
+.container > h1, .title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 300 !important;
+    letter-spacing: 1px;
 }
 
-body section.slideshow ul.navigation li.navigation-item{
-    position: absolute;
-    display: inline-block;
-    overflow: hidden;
-    width: 120px;
-    height: 120px;
-    padding: 10px;
+.container > h1, .container > p{
     text-align: center;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: border 0.5s ease-in-out;
 }
 
-body section.slideshow ul.navigation li.navigation-item .rotate-holder{
-    position: fixed;
-    display: block;
-    width: 0;
-    height: 0;
-    left: -9999px;
-    top: -9999px;
+.services{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
 }
 
-body section.slideshow ul.navigation li.navigation-item .background-holder{
+.service{
+    margin: 10px;
+    overflow: hidden;
+    padding: 35px 15px;
+    position: relative;
+    text-align: center;
+    transition: background-color 0.3s ease-in, transform 0.3s ease-in;
+    width: 200px;
+}
+
+.service:hover{
+    background-color: #8e44ad;
+    transform: translateY(-3px);
+}
+
+.service::before{
+    content: '';
+    border-width: 20px;
+    border-style: solid;
+    border-color: #222f3e rgba(1,1,1,0.4) rgba(0,0,0,0.4);
     position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    right: -40px;
+    top: -40px;
+    transition: right 0.3s ease-out, top 0.3s ease-out;
 }
 
-body section.slideshow .detail{
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
+.service:hover::before{
     right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 8;
+    top: 0;
 }
 
-body section.slideshow .detail .detail-item{
-    position: absolute;
+.service > i{
     display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out visibility 0.3s ease-in-out;
+    color: #8e44ad;
+    font-size: 4rem;
+    margin-bottom: 0.9rem;
+    transition: color 0.3s ease-out;
+}
 
+.service > .title{
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1.55rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    transition: color 0.3s ease-out;
+}
+
+.service > .description{
+    line-height: 1.55rem;
+    margin: 0;
+    transition: color 0.3s ease-out;
+}
+
+.service:hover > i,
+.service:hover > .title,
+.service:hover > .description{
+    color: white;
 }

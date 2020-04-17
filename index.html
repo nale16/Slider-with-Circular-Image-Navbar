@@ -1,108 +1,825 @@
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Slider With Circular Navigation Menu</title>
-        <link rel="stylesheet" href="style.css" class="href" type="text/css">
-    </head>
+  <head>
+   
+    <title>Slider With Circular Navigation Menu</title>
+    <link rel="stylesheet" href="animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link rel="stylesheet" href="style.css" class="href" type="text/css">
+	 
+    <style>
+      body {
+      margin: 0;
+      padding: 0;
+      
+      color: #FFFFFF;
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+          
+      }
+  
+    
+      body header {
+        background-color: transparent;
+        font-family: 'Oswald', sans-serif;
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 48px;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 90;
+      }
 
-    <body>
-        <section class="slideshow">
-            <ul class="navigation">
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner {
+        padding: 12px 1.5%;
+      }
+      
+      body header .header-inner .logo {
+        position: relative;
+        display: inline;
+        width: auto;
+        height: auto;
+        float: left;
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner .logo a {
+        position: relative;
+        display: inline;
+        width: auto;
+        height: auto;
+        color: #FFFFFF;
+        outline: 0px none;
+        outline: 0px;
+        text-decoration: none;
+        transition: all 0.35s ease-in-out;
+        text-transform: uppercase;
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner .logo a:hover {
+        color: rgba(255, 255, 255, 0.45);
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner .logo a span {
+        font-weight: 700;
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner nav {
+        position: relative;
+        display: inline;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        float: right;
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner nav li {
+        position: relative;
+        display: inline;
+        margin-left: 16px;
+      }
+    
+      body header .header-inner nav li a {
+      font-family: 'Oswald', sans-serif;
+        position: relative;
+        font-size: 13px;
+        color: #FFFFFF;
+        text-decoration: none;
+        line-height: 24px;
+        transition: all 0.35s ease-in-out;
+      }
+      
+      body header .header-inner nav li a span {
+        position: relative;
+        z-index: 2;
+      }
 
-                <li class="navigation-item active">
-                    <span class="rotate-holder">
-                        <span class="background-holder" style="background-image: url();">
-                        </span>
-                    </span>
-                </li>
+      body header .header-inner nav li a:hover {
+        color: rgba(255, 255, 255, 0.45);
+      }
 
-                <div class="detail">
-                    <div class="detail-item">
-                        <div class="headline">GERMANY</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        height: 100vh;
+        margin: 0 auto;
+        visibility: hidden;
+        overflow: hidden;
+      }
 
-                    <div class="detail-item">
-                        <div class="headline">UK</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow ul.navigation {
+        position: absolute;
+        display: block;
+        width: 640px;
+        height: 640px;
+        padding: 0;
+        margin: 0;
+        left: -230px;
+        top: 50%;
+        margin-top: -320px;
+        z-index: 10;
+      }
+      
+      body section.slideshow ul.navigation li.navigation-item {
+        position: absolute;
+        display: inline-block;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: border 0.6s ease-in-out;
+      }
+      
+      body section.slideshow ul.navigation li.navigation-item .rotate-holder {
+        position: fixed;
+        display: block;
+        width: 0;
+        height: 0;
+        left: -9999px;
+        top: -9999px;
+      }
 
-                    <div class="detail-item">
-                        <div class="headline">NETHERLANDS</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow ul.navigation li.navigation-item .background-holder {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-position: center center;    
+        background-size: cover;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+      }
 
+      body section.slideshow ul.navigation li.navigation-item:hover .background-holder {
+        opacity: 0.75;
+      }
+      
+      body section.slideshow ul.navigation li.navigation-item.active .background-holder {
+        opacity: 0;
+        visibility: hidden;
+      }
 
-                    <div class="detail-item">
-                        <div class="headline">SPAIN</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow .detail {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 8;
+      }
 
+      body section.slideshow .detail .detail-item {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      }
 
-                    <div class="detail-item">
-                        <div class="headline">SWISS</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow .detail .detail-item .headline {
+        position: absolute;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 480px);
+        height: 126px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: visible;
+        white-space: nowrap;
+        box-sizing: border-box;
+        z-index: 2;
+      }
 
-                    <div class="detail-item">
-                        <div class="headline">GREECE</div>
-                        <div class="background" style="background-image: url(); height: 100hv;"></div>
-                        <div class="bakcground" style="background-image: url(); height: 100vh; background-size:cover; background-position: center;"></div>
-                    </div>
+      body section.slideshow .detail .detail-item .para-text {
+        position: absolute;
+        display: block;
+        width: 100%;
+        max-width: calc(100% - 480px);
+        height: 126px;
+        top: 30%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        overflow: visible;
+        white-space: nowrap;
+        box-sizing: border-box;
+        z-index: 2;
+      }
+    
+      body section.slideshow .detail .detail-item .headline .letter {
+        font-family: 'Oswald', sans-serif;
+        position: relative;
+        display: inline-block;
+        opacity: 0;
+        visibility: hidden;
+        color: #FFFFFF;
+        font-size: 100px;
+        line-height: 110px;
+        font-weight: 900;
+        font-kerning: none;
+        white-space: nowrap;
+        box-sizing: border-box;
+          text-transform: uppercase;
+      }
+      
+      body section.slideshow .detail .detail-item .background {
+        position: absolute;
+        display: block;
+        width: 100%;
+        width: calc(100% + 100px);
+        height: 100%;
+        height: calc(100% + 100px);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: visible;
+        background-repeat: no-repeat;
+        background-position: center center;     
+        background-size: cover;
+        z-index: 1;
+      }
+
+      body section.slideshow .detail .detail-item .background::before {
+        content: ""; 
+        background: linear-gradient(to right, black 0%, rgba(0, 0, 0, 0) 90%);   
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+          
+      }
+      
+      body section.slideshow .detail .detail-item.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+    </style>
+	 
+  </head>
+  <body>
+    
+    <section class="slideshow">
+ 
+      <ul class="navigation">
+ 
+        <li class="navigation-item active">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(germany.jpg);"></span>
+        </li>
+        <!-- slideshow:navigation:item END -->
+
+        <!-- slideshow:navigation:item START -->
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(uk.jpg);"></span>
+        </li>
+       
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(netherlands.jpg);"></span>
+        </li>
+       
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(france.jpg);"></span>
+        </li>
+      
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(spain.jpg);"></span>
+        </li>
+      
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(greece.jpg);"></span>
+        </li>
+        
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(japan1.jpg);"></span>
+        </li>
+         
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(italy.jpg);"></span>
+        </li>
+         
+        <li class="navigation-item">
+          <span class="rotate-holder"></span>
+          <span class="background-holder" style="background-image: url(usa.jpg);"></span>
+        </li>
+       
+
+      </ul>
+      
+      <div class="detail">
+       
+        <div class="detail-item active">
+          <div class="headline">Jerman</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                      ~ Berlin <br>
+                      ~ Hamburg <br>
+                      ~ Munich <br>
+                      ~ Frankfurt <br>
+                      ~ Dortmund 
+                    </p>
                 </div>
-            </ul>
-        </section>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                      ~ Bradenburg Gate <br>
+                      ~ Neuschwanstein <br>
+                      ~ Oktoberfest <br>
+                      ~ Heidelburg Old City <br>
+                      ~ Frauekirche
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Falscher Hase <br>
+                        ~ Sauerkraut <br>
+                        ~ Apfelstrudel <br>
+                        ~ Bretzel <br>
+                        ~ Schwarzwalder Kirschotorte 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(germany.jpg); height: 100vh;"></div>
+          <!-- <div class="background" style="background-image: url(assets/img/img-1.jpg); height: 100vh; background-size: cover; background-position: center;"></div> -->
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Inggris</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ London <br>
+                        ~ Manchester <br>
+                        ~ Oxford <br>
+                        ~ Ediburg <br>
+                        ~ Cambridge 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Big Ben <br>
+                        ~ Tower of London <br>
+                        ~ London Eye <br>
+                        ~ Stonehenge <br>
+                        ~ Tower Bridge 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Yorkshire Pudding <br>
+                        ~ Eton Mess <br>
+                        ~ Muffin <br>
+                        ~ Bubble & Squeak <br>
+                        ~ Fish and Chips 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(uk.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">BELANDA</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+              <!-- <p class="wow bounceIn">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              </p> -->
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Amsterdam <br>
+                        ~ Rotterdam <br>
+                        ~ Den Haag <br>
+                        ~ Leiden <br>
+                        ~ Maastricht 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Kinderdjik Village <br>
+                        ~ Kanal Amsterdam <br>
+                        ~ Keukenhof Garden <br>
+                        ~ Rijksmuseum <br>
+                        ~ Frisian Island
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Spekkoek <br>
+                        ~ Frikandellen <br>
+                        ~ Poffertjes <br>
+                        ~ Smoor <br>
+                        ~ Krokante Kipballetjes
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(netherlands.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Perancis</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+              <!-- <p class="wow bounceIn">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              </p> -->
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Paris <br>
+                        ~ Nice <br>
+                        ~ Marseille <br>
+                        ~ Lyon <br>
+                        ~ Starsbourg 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Eiffel Tower <br>
+                        ~ Louvre Museum <br>
+                        ~ Arc The Triomphe <br>
+                        ~ Montmarte <br>
+                        ~ Place De La Concorde
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Croissant <br>
+                        ~ Crepes <br>
+                        ~ Confit de Canard <br>
+                        ~ Creme Brulee <br>
+                        ~ Baguette
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(france.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Spanyol</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Madrid <br>
+                        ~ Barcelona <br>
+                        ~ Sevilla <br>
+                        ~ Valencia <br>
+                        ~ Kordoba 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ La Sagrada Familia <br>
+                        ~ Alhambra <br>
+                        ~ Park Guell <br>
+                        ~ Casa Milla <br>
+                        ~ Plaza Mayor
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Churros con Chocolate <br>
+                        ~ Paela <br>
+                        ~ Empenadas <br>
+                        ~ Cream Catallina <br>
+                        ~ Tortila
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(spain.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Yunani</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Athena <br>
+                        ~ Arachova <br>
+                        ~ Delphi <br>
+                        ~ Lavreotiki <br>
+                        ~ Livadeia 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Acropolis <br>
+                        ~ Meteora <br>
+                        ~ Delphi Theatre <br>
+                        ~ Santorini <br>
+                        ~ Mykonos
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Taramasalat <br>
+                        ~ Souvlaki <br>
+                        ~ Feta Cheese <br>
+                        ~ Tzaziki <br>
+                        ~ Moussaka 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(greece.jpg);"></div> 
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Jepang</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">our services</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Tokyo <br>
+                        ~ Osaka <br>
+                        ~ Sapporo <br>
+                        ~ Shibuya <br>
+                        ~ Okayama 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Mount Fuji <br>
+                        ~ Fujiko F Fujio Museum <br>
+                        ~ Okinawa Churaumi Aquarium <br>
+                        ~ Jigokudani Monkey Park <br>
+                        ~ Tokyo Tower
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Sushi <br>
+                        ~ Tempura <br>
+                        ~ Mocchi <br>
+                        ~ Soba <br>
+                        ~ Yakiniku 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(japan1.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">Italia</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ Roma <br>
+                        ~ Milan <br>
+                        ~ Venesia <br>
+                        ~ Napoli <br>
+                        ~ Bologna 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Colloseum <br>
+                        ~ Phanteon <br>
+                        ~ Piazza Novona <br>
+                        ~ Trevi FOuntain <br>
+                        ~ Cinque Terre
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Ravioli <br>
+                        ~ Pasta Carbonara <br>
+                        ~ Tiramisu <br>
+                        ~ Gelato <br>
+                        ~ Lasagna 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(italy.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+        <!-- slideshow:details START -->
+        <div class="detail-item">
+          <div class="headline">USA</div>
+          <div class="para-text">
+            <div class="container">
+              <h1 class="wow bounceInDown">Plan Trips</h1>
+    
+              <div class="services wow bounceInUp">
+                <div class="service">
+                    <i class="fa fa-building-o"></i>
+                    <h4 class="title">Cities</h4>
+                    <p class="description">
+                        ~ New York City <br>
+                        ~ Washington DC <br>
+                        ~ Los Angeles <br>
+                        ~ San Fransisco <br>
+                        ~ New Orleans 
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-street-view"></i>
+                    <h4 class="title">Tourist Attractions</h4>
+                    <p class="description">
+                        ~ Las Vegas City <br>
+                        ~ Waikiki <br>
+                        ~ Walt Disney Resort <br>
+                        ~ Golden Gate Bridge <br>
+                        ~ Yellowstone
+                    </p>
+                </div>
+    
+                <div class="service">
+                    <i class="fa fa-spoon"></i>
+                    <h4 class="title">Foods</h4>
+                    <p class="description">
+                        ~ Taco <br>
+                        ~ Burrito <br>
+                        ~ Grilled Chicken <br>
+                        ~ Pie Apple <br>
+                        ~ French Fries 
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="background" style="background-image: url(usa.jpg);"></div>
+        </div>
+        <!-- slideshow:details END -->
+        
+      </div>
+      <!-- slideshow:details END -->
 
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/TextPlugin.min.js"></script>
+    </section>
+    <!-- slideshow END -->
 
-    </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/TextPlugin.min.js"></script>
+    <script src="custom.js"></script>
+    <!-- <script src="wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script> -->
+
+  </body>
 </html>
